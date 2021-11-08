@@ -4,4 +4,8 @@
       die("Database query failed"); 
     }
   }
+
+  function find_all_subjects() {
+    
+  }
 ?>

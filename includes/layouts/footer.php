@@ -1,4 +1,3 @@
-
   <div class="footer">
     Copyright &copy; 2021
   </div>
@@ -8,4 +7,4 @@
   if(isset($connection)) {
     mysqli_close($connection);
   }
-  ?>
+?>
