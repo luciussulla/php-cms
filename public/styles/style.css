@@ -90,15 +90,16 @@ ul.pages {
   margin: 1em 0; 
   padding-left: 2em; 
   list-style: square; 
+  /* this fixes the problem with the bolding of all elemeents*/
+  font-weight: normal; 
+}
+
+.selected {
+  font-weight: bold;
 }
 
 ul.pages a {
   text-decoration: none;
-  
-}
-
-.selected {
-  font-weight: bold; 
 }
 
 .page {
