@@ -25,9 +25,10 @@
             <?php 
               $subject_set = find_all_subjects();
               $subject_count = mysqli_num_rows($subject_set);
+              // the plus one is for a position where the item is last 
               for ($count=1; $count<= $subject_count+1; $count++) {
                 echo "<option value=\"{$count}\">{$count}</option>";
-              }?>
+            }?>
           </select>
         </p>
         <p>Visible:  
@@ -36,6 +37,7 @@
         </p>
         <input type="submit" name="submit" value="Create Subject">
       </form>
+
       <br/>
       <a href="manage_content.php">Cancel</a>
     </div>

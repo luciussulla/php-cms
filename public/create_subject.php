@@ -5,6 +5,7 @@
 
 <?php 
   if (isset($_POST['submit'])) {
+
     // process the form   
     $menu_name = mysql_prep($_POST["menu_name"]);
     $position = (int) $_POST["position"];
@@ -30,6 +31,7 @@
     $query .= " '{$menu_name}', {$position}, {$visible}";
     $query .= ")";
 
+    // redirect 
     $result = mysqli_query($connection, $query);
     if($result) {
       $_SESSION["message"] = "Subject created.";
@@ -45,7 +47,5 @@
     redirect_to("new_subject.php");
   }
 ?>
-
-
 
 <?php if(isset($connection)) { mysqli_close($connection);} ?>
