@@ -82,6 +82,12 @@ a:hover {
 
 /* PAGE CONTENT */ 
 
+.view-content {
+  color: 000; 
+  margin: 1em; 
+  padding: 1em; 
+  border: 1px solid #999; 
+}
 
 ul.subjects {
   margin: 1em 0; 

@@ -75,7 +75,7 @@
       return null; 
     }
   }
-  
+
   function find_selected_page() {
     global $current_page;
     global $current_subject;
@@ -102,9 +102,9 @@
         }  
         $output .= ">";
         $output .= "<a href=\"manage_content.php?subject=";
-        $output .= $subject["id"];
+        $output .= urlencode($subject["id"]);
         $output .= "\">";
-        $output .= $subject["menu_name"] . " (" . $subject["id"] . ")";
+        $output .= htmlentities($subject["menu_name"]) . " (" . $subject["id"] . ")";
         $output .= "</a>";
     
         $page_set = find_all_pages($subject["id"]);
@@ -116,9 +116,9 @@
             }
             $output .= ">";
             $output .= "<a href=\"manage_content.php?page=";
-            $output .= $page["id"];
+            $output .= urlencode($page["id"]);
             $output .= "\">";
-            $output .= $page["menu_name"]; 
+            $output .= htmlentities($page["menu_name"]); 
             $output .= "</a>";
             $output .= "</li>";
           }  
@@ -138,7 +138,9 @@
       $output .= "Please fix the following errors:";
       $output .= "<ul>";
       foreach($errors as $key=>$error) {
-        $output .= "<li>{$error}</li>";
+        $output .= "<li>";
+        $output .= $error; 
+        $output .= "</li>";
       }    
       $output .= "</ul>";
       $output .= "</div>";

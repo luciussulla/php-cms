@@ -31,7 +31,8 @@
 
       // redirect 
       $result = mysqli_query($connection, $query);
-      if($result && mysqli_affected_rows($connection)==1) {
+      // more equal because if values are the same it will return 0 not 1. When we have error we will get -1;
+      if($result && mysqli_affected_rows($connection)>=0) {
         $_SESSION["message"] = "Subject edited.";
         redirect_to("manage_content.php");
       } else {
@@ -61,17 +62,17 @@
     <?php 
       if(!empty($message)) {
         // $message is just a variable (look up) it does not use the variable;
-        echo "<div class=\"message\">" . "{$message}" ."</div>";
+        echo "<div class=\"message\">" . htmlentities($message) ."</div>";
       }
     ?>
     <!-- errors are stored as global $errors variable in the validation_functions.php --> 
     <?php echo form_errors($errors) ?>
 
-    <h2>Edit Subejct <?php echo $current_subject["menu_name"] ?></h2>
+    <h2>Edit Subejct <?php echo htmlentities($current_subject["menu_name"]); ?></h2>
 
-    <form action="edit_subject.php?subject=<?php echo $current_subject["id"];?>" method="post">
+    <form action="edit_subject.php?subject=<?php echo urlencode($current_subject["id"]);?>" method="post">
       <p>Menu name: 
-        <input type="text" name="menu_name" value="<?php echo $current_subject["menu_name"] ?>" />
+        <input type="text" name="menu_name" value="<?php echo htmlentities($current_subject["menu_name"]); ?>" />
       </p>
       <p>Position:
         <select name="position">
@@ -97,7 +98,7 @@
     <a href="manage_content.php">Cancel</a>
     &nbsp;
     &nbsp;
-    <a href="delete_subject.php?subject=<?php echo $current_subject["id"]?>" onclick="return confirm('Are you sure');">Delete subject</a>
+    <a href="delete_subject.php?subject=<?php echo urlencode($current_subject["id"]);?>" onclick="return confirm('Are you sure');">Delete subject</a>
   </div>
 </div>
 

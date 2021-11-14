@@ -5,7 +5,6 @@
 
 <?php find_selected_page(); ?>
 
-
 <?php 
   $current_subject = find_subject_by_id($_GET["subject"]);
   if(!$current_subject) {
@@ -14,12 +13,11 @@
     redirect_to("manage_content.php");
   }
   // make sure all pages from subject are deleted before we delete the subject 
-  $pages_for_subject = find_all_pages($current_subject["id"]);
+  $pages_for_subject = find_all_pagses($current_subject["id"]);
   if(mysqli_num_rows($pages_for_subject)>0) {
     $_SESSION["message"] = "Can't delete subject with pages";
     redirect_to("manage_content.php");
   }
-
 
   $id = $current_subject["id"];
   $query = "DELETE FROM subjects ";

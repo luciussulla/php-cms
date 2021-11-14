@@ -1,5 +1,5 @@
   <div class="footer">
-    Copyright &copy; 2021
+    Copyright &copy; <?php echo date("Y");?>
   </div>
 </body>
 </html> 
