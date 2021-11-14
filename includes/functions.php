@@ -75,7 +75,7 @@
       return null; 
     }
   }
-
+  
   function find_selected_page() {
     global $current_page;
     global $current_subject;

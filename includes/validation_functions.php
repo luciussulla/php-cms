@@ -21,8 +21,6 @@
 
   function validate_max_lengths($fields_with_max_lengths) {
     global $errors;
-    // $fields_with_max_lengths = array("username"=> 30, 
-    // "password"=> 8);
     foreach($fields_with_max_lengths as $field => $max) {
       $value = trim($_POST[$field]);
       if(!has_max_length($value, $max)) {
@@ -34,7 +32,13 @@
   function validate_presences($required_fields) {
     global $errors;
     foreach($required_fields as $field) {
-      $value = trim($_POST[$field]); 
+      // let's check that user 've sent the visible variable at all, otherewise we'll get an error
+      if(isset($_POST[$field])) {
+        $value = trim($_POST[$field]); 
+      } else {
+        $value = "";
+      }
+
       if(!has_presence($value)) {
         $errors[$field] = fieldname_as_text($field) . " can't ba blank";
       }
