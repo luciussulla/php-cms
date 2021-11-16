@@ -44,8 +44,8 @@
   function find_subject_by_id($subject_id) {
     global $connection;
     $safe_subject_id = mysqli_real_escape_string($connection, $subject_id);
-
-    $query = "SELECT * ";
+     
+    $query =  "SELECT * ";
     $query .= "FROM subjects ";
     $query .= "WHERE id={$safe_subject_id} ";
     $query .= "LIMIT 1";

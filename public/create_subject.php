@@ -43,7 +43,6 @@
     
   } else {
     // Probably a GET request
-    
     redirect_to("new_subject.php");
   }
 ?>
