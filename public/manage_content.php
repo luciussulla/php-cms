@@ -10,7 +10,6 @@
       <?php echo navigation($current_subject, $current_page) ?>
       <br/>
       <a href="new_subject.php">+ Add new subject</a><br/>
-      <a href="new_page.php">+ Add new page</a>
     </div>
 
     <div class="page">
@@ -21,10 +20,26 @@
         Position:  <?php echo $current_subject["position"]; ?> <br>
         Visible:   <?php echo $current_subject["visible"] == 1 ? "yes" : "no" ?><br/>
         <a href="edit_subject.php?subject=<?php echo $current_subject["id"];?>">Edit subject</a>
+
+        <h3 class="manage_content-h3">Pages for the subject</h3>
+        <ul class="manage_content-ul">
+          <?php 
+            $subject_pages = find_all_pages($current_subject["id"]);
+            $output = "";
+            foreach($subject_pages as $page) {
+              $output .= "<li><a href=\"manage_content.php?page={$page["id"]}\" />";
+              $output .= $page["menu_name"];
+              $output .= "</a>";
+              $output .= "</li>";
+            }  
+            echo $output;   
+          ?>
+        </ul>
+        <a class="new_page-links" href="new_page.php?subject=<?php echo $current_subject["id"] ?>">Create new page</a>
       <?php } elseif($current_page) { ?>
 
         <h2>Manage Page</h2>
-         Menu Name: <?php echo htmlentities($current_page["menu_name"]); ?>   <br/>
+         Menu Name: <?php echo htmlentities($current_page["menu_name"]); ?>     <br/>
          Position:  <?php echo $current_page["position"] ?> <br>
          Visible:   <?php echo $current_page["visible"] == 1 ? "yes" : "no"; ?> <br/>
          <div class="view-content">

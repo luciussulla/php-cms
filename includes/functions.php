@@ -30,7 +30,7 @@
 
   function find_all_pages($subject_id) {
     global $connection; 
-
+    
     $query = "SELECT * ";
     $query .= "FROM pages ";
     $query .= "WHERE visible = 1 ";
@@ -147,4 +147,6 @@
     }    
     return $output;
   }
+
+  
 ?>

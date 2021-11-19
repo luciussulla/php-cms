@@ -139,3 +139,15 @@ div.message {
   margin: 1em 0; 
   padding: 1em; 
 }
+
+.manage_content-h3 {
+  margin: 30px 0 30px 0; 
+}
+.manage_content-ul {
+  list-style: none; 
+}
+
+a.new_page-links {
+  display: inline-block; 
+  margin: 10px 0 0 0; 
+}

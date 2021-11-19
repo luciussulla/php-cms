@@ -15,7 +15,7 @@
       <?php echo form_errors($errors) ?>
 
       <h2>Create Subject</h2>
-
+      
       <form action="create_subject.php" method="post">
         <p>Menu name: 
           <input type="text" name="menu_name" value="" />

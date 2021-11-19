@@ -20,20 +20,29 @@
         <p>Menu name: 
           <input type="text" name="menu_name" value="" />
         </p>
-        <p>Position:  
-          <select name="position">
-            position here...
-          </select>
-        </p>
+        
         <p>Subject:
           <select>
-            <?php $subjects = find_all_subjects();
-                  foreach($subjects as $subject_obj) {
-                    echo "<option value=\"{$subject_obj["position"]}\">{$subject_obj["position"]}</option>"; 
-                  } 
+            <?php 
+              $subjects = find_all_subjects();
+              foreach($subjects as $subject_obj) {
+                echo "<option value=\"{$subject_obj["position"]}\">{$subject_obj["position"]}</option>"; 
+              } 
             ?>
           </select>     
         </p>
+        
+        <p>Position:
+          <select name="position">
+            <?php $pages = find_all_pages($current_subject["id"]);
+              $num_pages = mysqli_num_rows($pages);
+              for ($i=1;$i<=$num_pages+1;$i++) {
+                echo "<option value=\"{$i}\">{$i}</option>";
+              }
+            ?>
+          </select>
+        </p>
+
         <p>Visible:  
           <input type="radio" name="visible" value="0" />No &nbsp;
           <input type="radio" name="visible" value="1" />Yes
