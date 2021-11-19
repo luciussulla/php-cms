@@ -10,7 +10,8 @@
     $menu_name = mysql_prep($_POST["menu_name"]);
     $position = (int) $_POST["position"];
     $visible = (int) $_POST["visible"]; // this will be typecast by mysql into boolean
-    $content = $_POST["content"] 
+    $content = $_POST["content"];
+    $subject_id = (int) $_POST["subject_id"];
     
     // validations
     $required_fields = array("menu_name", "position", "visible", "content");
@@ -22,25 +23,25 @@
     // display errors 
     if (!empty($errors)) { // errors created in validation functions and made a global variable 
       $_SESSION["errors"] = $errors; 
-      redirect_to("new_subject.php");
+      redirect_to("new_page.php");
       // the redirect has exit after it so it will not call anything after 
     }
 
     // Perform db query
-    $query  = "INSERT INTO subjects (";
-    $query .= " menu_name, position, visible"; 
+    $query  = "INSERT INTO pages (";
+    $query .= "subject_id, menu_name, position, visible, content"; 
     $query .= ") VALUES (";
-    $query .= " '{$menu_name}', {$position}, {$visible}";
+    $query .= "{$subject_id}, '{$menu_name}', {$position}, {$visible}, '{$content}'";
     $query .= ")";
 
     // redirect 
     $result = mysqli_query($connection, $query);
     if($result) {
-      $_SESSION["message"] = "Subject created.";
+      $_SESSION["message"] = "Page created.";
       redirect_to("manage_content.php");
     } else {
-      $_SESSION["message"] = "Subject creation failed.";
-      redirect_to("new_subject.php");
+      $_SESSION["message"] = "Page creation failed.";
+      redirect_to("new_page.php");
     }
     
   } else {

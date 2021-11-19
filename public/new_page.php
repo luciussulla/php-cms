@@ -3,7 +3,7 @@
 <?php require_once('../includes/functions.php');?>
 <?php include('../includes/layouts/header.php');?>
 <?php find_selected_page(); ?>
-  
+ 
   <div class="main"> 
     <div class="navigation"> 
       <?php echo navigation($current_subject, $current_page) ?>
@@ -22,7 +22,7 @@
         </p>
         
         <p>Subject:
-          <select>
+          <select name="subject_id">
             <?php 
               $subjects = find_all_subjects();
               foreach($subjects as $subject_obj) {
@@ -48,7 +48,7 @@
           <input type="radio" name="visible" value="1" />Yes
         </p>
         <p>Content: 
-            <textarea name="content">
+            <textarea name="content" value="">
             </textarea>
         </p>
         <input type="submit" name="submit" value="Create Page">
