@@ -42,14 +42,14 @@
     // Probably a GET request when you visite the edit page for the 1st time
     // just display the form
   }
-?>
+?>  
 
 <?php 
-  // if(!$current_page) {
-  //   // page ID was missing
-  //   // page cound not be found in DB 
-  //   redirect_to("manage_content.php");
-  // }
+  if(!$current_page) {
+    // page ID was missing
+    // page cound not be found in DB 
+    redirect_to("manage_content.php");
+  }
 ?>
   
 <div class="main"> 
