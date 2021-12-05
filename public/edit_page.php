@@ -15,14 +15,14 @@
     
     if (empty($errors)) {
       // process the form   
-      $id = $current_subject["id"];
+      $id = $current_page["id"];
       $menu_name = mysql_prep($_POST["menu_name"]);
       $position = (int) $_POST["position"];
       $visible = (int) $_POST["visible"]; 
       // this will be typecast by mysql into boolean
-          
+      
       // Perform db query
-      $query  = "UPDATE subjects SET "; 
+      $query  = "UPDATE pages SET "; 
       $query .= "menu_name='{$menu_name}', ";
       $query .= "position={$position}, ";
       $query .= "visible={$visible} ";
@@ -45,11 +45,11 @@
 ?>
 
 <?php 
-  if(!$current_subject) {
-    // subject ID was missing
-    // subject cound not be found in DB 
-    redirect_to("manage_content.php");
-  }
+  // if(!$current_page) {
+  //   // page ID was missing
+  //   // page cound not be found in DB 
+  //   redirect_to("manage_content.php");
+  // }
 ?>
   
 <div class="main"> 
@@ -59,6 +59,13 @@
 
   <div class="page">
     <?php 
+      if(isset($_GET["subject"])) {
+        echo "<p>Subject is {$_GET["subject"]} </p>";
+      }
+      if(isset($_GET["page"])) {
+        echo "<p>Page is set {$_GET["page"]} </p>";
+      }
+
       // if there were any error on the DB side
       if(!empty($message)) {
         // $message is just a variable (look up) it does not use the session variable;
@@ -68,37 +75,44 @@
     <!-- errors are stored as global $errors variable in the validation_functions.php --> 
     <?php echo form_errors($errors) ?>
 
-    <h2>Edit Subejct <?php echo htmlentities($current_subject["menu_name"]); ?></h2>
+    <h2>Edit Page <?php echo htmlentities($current_page["menu_name"]); ?></h2>
 
-    <form action="edit_subject.php?subject=<?php echo urlencode($current_subject["id"]);?>" method="post">
-      <p>Menu name: 
-        <input type="text" name="menu_name" value="<?php echo htmlentities($current_subject["menu_name"]); ?>" />
+    <form action="edit_page.php?page=<?php echo urlencode($current_page["id"]);?>" method="post">
+      <!-- we need to send the page's hidden id -->
+      <p>Page's Subject id: <?php echo $current_page["subject_id"] ?> </p>
+      <input type="hidden" value="<?php echo $current_page["subject_id"] ?>" /> 
+
+      <p>Page's menu name: 
+        <input type="text" name="menu_name" value="<?php echo htmlentities($current_page["menu_name"]); ?>" />
       </p>
+
       <p>Position:
         <select name="position">
           <?php 
-            $subject_set = find_all_subjects();
-            $subject_count = mysqli_num_rows($subject_set);
-            for ($count=1; $count<= $subject_count; $count++) {
+            $page_set = find_all_pages($current_page["subject_id"]);
+            $page_count = mysqli_num_rows($page_set);
+            for ($count=1; $count<= $page_count; $count++) {
               echo "<option value=\"{$count}\"";
-              if($count == $current_subject["position"]) {echo " selected";}
+              if($count == $current_page["position"]) {echo " selected";}
               echo ">{$count}</option>";
             }
           ?>
         </select>
       </p>
+
       <p>Visible:  
-        <input type="radio" name="visible" value="0" <?php if ($current_subject["visible"] === 0) { echo "checked=\"checked\"";} ?> />No &nbsp;
-        <input type="radio" name="visible" value="1" <?php if ($current_subject["visible"] === 1) { echo "checked=\"checked\"";} ?> />Yes
+        <input type="radio" name="visible" value="0" <?php if ($current_page["visible"] === 0) { echo "checked=\"checked\"";} ?> />No &nbsp;
+        <input type="radio" name="visible" value="1" <?php if ($current_page["visible"] === 1) { echo "checked=\"checked\"";} ?> />Yes
       </p>
-      <input type="submit" name="submit" value="Edit Subject">
+
+      <input type="submit" name="submit" value="Edit Page">
     </form>
 
     <br/>
     <a href="manage_content.php">Cancel</a>
     &nbsp;
     &nbsp;
-    <a href="delete_subject.php?subject=<?php echo urlencode($current_subject["id"]);?>" onclick="return confirm('Are you sure?');">Delete subject</a>
+    <a href="delete_page.php?page=<?php echo urlencode($current_page["id"]);?>" onclick="return confirm('Are you sure?');">Delete page</a>
   </div>
 </div>
 

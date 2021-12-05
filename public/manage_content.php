@@ -16,11 +16,11 @@
       <?php echo message(); ?>
       <?php if($current_subject) { ?> 
        <h2>Manage Subject</h2> 
-        Menu Name: <?php echo htmlentities($current_subject["menu_name"]); ?> <br/>
-        Position:  <?php echo $current_subject["position"]; ?> <br>
+        Menu Name: <?php echo htmlentities($current_subject["menu_name"]); ?>   <br/>
+        Position:  <?php echo $current_subject["position"]; ?>                  <br/>
         Visible:   <?php echo $current_subject["visible"] == 1 ? "yes" : "no" ?><br/>
-        <a href="edit_subject.php?subject=<?php echo $current_subject["id"];?>">Edit subject</a>
-
+        <a href="edit_subject.php?subject=<?php echo $current_subject["id"];?>"> Edit subject</a>  
+        
         <h3 class="manage_content-h3">Pages for the subject</h3>
         <ul class="manage_content-ul">
           <?php 
@@ -40,8 +40,10 @@
 
         <h2>Manage Page</h2>
          Menu Name: <?php echo htmlentities($current_page["menu_name"]); ?>     <br/>
-         Position:  <?php echo $current_page["position"] ?> <br>
+         Position:  <?php echo $current_page["position"] ?>                     <br>
          Visible:   <?php echo $current_page["visible"] == 1 ? "yes" : "no"; ?> <br/>
+         Edit Page  <a href="edit_page.php?subject=<?php echo $current_page["subject_id"]?>&page=<?php echo $current_page["id"] ?>">Edit</a><br/>
+
          <div class="view-content">
            <?php echo $current_page["content"]; ?>
          </div>

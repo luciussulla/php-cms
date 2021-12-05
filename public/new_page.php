@@ -42,15 +42,17 @@
             ?>
           </select>
         </p>
-
+        
         <p>Visible:  
           <input type="radio" name="visible" value="0" />No &nbsp;
           <input type="radio" name="visible" value="1" />Yes
         </p>
+
         <p>Content: 
             <textarea name="content" value="">
             </textarea>
         </p>
+        
         <input type="submit" name="submit" value="Create Page">
       </form>
 

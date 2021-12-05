@@ -19,8 +19,8 @@
     redirect_to("manage_content.php");
   }
 
-  $id = $current_subject["id"];
-  $query = "DELETE FROM subjects ";
+  $id =   $current_subject["id"];
+  $query  = "DELETE FROM subjects ";
   $query .= "WHERE id={$id} ";
   $query .= "LIMIT 1";
 

@@ -26,7 +26,7 @@
       redirect_to("new_page.php");
       // the redirect has exit after it so it will not call anything after 
     }
-
+    
     // Perform db query
     $query  = "INSERT INTO pages (";
     $query .= "subject_id, menu_name, position, visible, content"; 

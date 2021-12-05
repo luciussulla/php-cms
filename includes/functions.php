@@ -21,7 +21,7 @@
 
     $query = "SELECT * ";
     $query .= "FROM subjects ";
-    //$query .= "WHERE visible = 1 ";
+    $query .= "WHERE visible = 1 ";
     $query .= "ORDER BY position ASC"; 
     $subject_set = mysqli_query($connection, $query); 
     confirm_query($subject_set);
@@ -36,6 +36,7 @@
     $query .= "WHERE visible = 1 ";
     $query .= "AND subject_id = {$subject_id} ";
     $query .= "ORDER BY position ASC"; 
+    
     $page_set = mysqli_query($connection, $query); 
     confirm_query($page_set);  
     return $page_set;
@@ -80,7 +81,10 @@
     global $current_page;
     global $current_subject;
 
-    if (isset($_GET["subject"])) {
+    if (isset($_GET["page"]) && isset($_GET["subject"])) {
+      $current_page =    find_page_by_id($_GET["page"]); 
+      $current_subject = find_subject_by_id($_GET["subject"]);
+    } elseif (isset($_GET["subject"])) {
       $current_subject = find_subject_by_id($_GET["subject"]);
       $current_page = null; 
     } elseif(isset($_GET["page"])) {
@@ -92,6 +96,7 @@
     }
   }
 
+  // passing object arguments 
   function navigation($subject_assoc, $page_assoc) {
     $output = "<ul class=\"subjects\">";
     $subject_set = find_all_subjects(); 
