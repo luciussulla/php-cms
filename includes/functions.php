@@ -70,6 +70,7 @@
 
     $page_set = mysqli_query($connection, $query);
     confirm_query($page_set); 
+    
     if($page = mysqli_fetch_assoc($page_set)) {
       return $page;  
     } else {
@@ -81,7 +82,7 @@
     global $current_page;
     global $current_subject;
 
-    if (isset($_GET["page"]) && isset($_GET["subject"])) {
+    if (isset($_GET["page"]) && isset($_GET["subject"])) { // this option is for the edit_page.php since it receives both subject and page ids
       $current_page =    find_page_by_id($_GET["page"]); 
       $current_subject = find_subject_by_id($_GET["subject"]);
     } elseif (isset($_GET["subject"])) {
@@ -153,5 +154,4 @@
     return $output;
   }
 
-  
 ?>

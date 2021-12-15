@@ -6,7 +6,7 @@
 
   <div class="main"> 
     <div class="navigation"> 
-      <a hre="admin.php">&laquo; Main Menu</a><br/>
+      <a href="admin.php">&laquo; Main Menu</a><br/>
       <?php echo navigation($current_subject, $current_page) ?>
       <br/>
       <a href="new_subject.php">+ Add new subject</a><br/>
@@ -43,6 +43,7 @@
          Position:  <?php echo $current_page["position"] ?>                     <br>
          Visible:   <?php echo $current_page["visible"] == 1 ? "yes" : "no"; ?> <br/>
          Edit Page  <a href="edit_page.php?subject=<?php echo $current_page["subject_id"]?>&page=<?php echo $current_page["id"] ?>">Edit</a><br/>
+         Delete Page <a href="delete_page.php?page=<?php echo $current_page["id"] ?>">Delete</a><br/> 
 
          <div class="view-content">
            <?php echo $current_page["content"]; ?>

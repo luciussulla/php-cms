@@ -17,6 +17,7 @@
       <h2>Create Page</h2>
       
       <form action="create_page.php" method="post">
+        
         <p>Menu name: 
           <input type="text" name="menu_name" value="" />
         </p>
