@@ -3,6 +3,7 @@
 <?php require_once('../includes/functions.php');?>
 <?php require_once('../includes/validation_functions.php'); ?>
 <?php find_selected_page(); ?>
+<?php $layout_context="admin"?>
 <?php include('../includes/layouts/header.php'); ?>
 <?php 
   if (isset($_POST['submit'])) {
@@ -89,7 +90,7 @@
       <p>Position:
         <select name="position">
           <?php 
-            $page_set = find_all_pages($current_page["subject_id"]);
+            $page_set = find_all_pages($current_page["subject_id"], false);
             $page_count = mysqli_num_rows($page_set);
             for ($count=1; $count<= $page_count; $count++) {
               echo "<option value=\"{$count}\"";
