@@ -1,31 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="header">
-    <h1>Widget Corp</h1>
-  </div>
-  <div class="main">
-    <div class="navigation">
-      
+<?php require_once('../includes/session.php'); ?>
+<?php require_once('../includes/dbconnection.php');?>
+<?php require_once('../includes/functions.php');?>
+<?php include('../includes/layouts/header.php');?>
+<?php find_selected_page(); ?>
+
+  <div class="main"> 
+    <div class="navigation"> 
+      <a href="admin.php">&laquo; Main Menu</a><br/>
+      <?php 
+        echo public_navigation($current_subject, $current_page); 
+      ?>
+      <br/>
+      <a href="new_subject.php">+ Add new subject</a><br/>
     </div>
+
     <div class="page">
-      <h2>Admin Menu</h2>
-      <p>Welcome to the admin area</p>
-      <ul>
-        <li><a href="admin.php">admin</a></li>
-        <li><a href="manage_content.php">manage content</a></li>
-        <li><a href="manage_admins.php">manage admins</a></li>
-      </ul>
+      <?php if($current_subject) { ?> 
+       <h2>Manage Subject</h2> 
+        Menu Name: <?php echo htmlentities($current_subject["menu_name"]); ?>   <br/>
+        
+      <?php } elseif($current_page) { ?>
+
+        <h2>Manage Page</h2>
+
+         <div class="view-content">
+           <?php echo $current_page["content"]; ?>
+         </div>
+
+      <?php  } else { ?>
+         Please selcect subject or a page.
+       <?php } ?>
     </div>
   </div>
-  <div class="footer">
-    Copyright &copy; 2021
-  </div>
-</body>
-</html>
+
+<?php include('../includes/layouts/footer.php') ?>

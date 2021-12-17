@@ -70,7 +70,7 @@
 
     $page_set = mysqli_query($connection, $query);
     confirm_query($page_set); 
-    
+
     if($page = mysqli_fetch_assoc($page_set)) {
       return $page;  
     } else {
@@ -137,6 +137,49 @@
     return $output; 
   }  
 
+  function public_navigation($subject_assoc, $page_assoc) {
+    // echo print_r($page_assoc); 
+    $output = "<ul class=\"subjects\">";
+    $subject_set = find_all_subjects(); 
+    while($subject = mysqli_fetch_assoc($subject_set)) {      
+      $output .= "<li ";  
+        if($subject_assoc && $subject["id"]==$subject_assoc["id"]) {
+          $output .= "class=\"selected\"";
+        }  
+        $output .= ">";
+        $output .= "<a href=\"index.php?subject=";
+        $output .= urlencode($subject["id"]);
+        $output .= "\">";
+        $output .= htmlentities($subject["menu_name"]);
+        $output .= "</a>";
+        // show only pages for selected subject 
+        if($subject["id"]==$subject_assoc["id"]) {
+          $page_set = find_all_pages($subject["id"]);
+          $output .= "<ul class=\"pages\">";
+            while($page = mysqli_fetch_assoc($page_set)) {
+              $output .= "<li";
+              if($page_assoc && $page["id"]==$page_assoc["id"]) {
+                $output .= " class=\"selected\"";
+              }
+              $output .= ">";
+              $output .= "<a href=\"index.php?subject={$subject_assoc["id"]}&page=";
+              $output .= urlencode($page["id"]);
+              $output .= "\">";
+              $output .= htmlentities($page["menu_name"]); 
+              $output .= "</a>";
+              $output .= "</li>";
+            }  
+            mysqli_free_result($page_set);
+          $output .= "</ul>";   
+        }  
+      $output .= "</li>"; // end of subject li
+    } 
+    mysqli_free_result($subject_set);
+    $output .= "</ul>";
+    return $output; 
+  }  
+
+  
   function form_errors($errors = array()) {
     $output = "";
     if(!empty($errors)) {
