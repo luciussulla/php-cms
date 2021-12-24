@@ -4,9 +4,9 @@
 <?php require_once('../includes/dbconnection.php');?>
 <?php require_once('../includes/functions.php');?>
 <?php include('../includes/layouts/header.php');?>
-<?php find_selected_page(); ?>
+<?php find_selected_page(true); ?>
 
-  <div class="main"> 
+  <div class="main">  
     <div class="navigation"> 
       <a href="admin.php">&laquo; Main Menu</a><br/>
       <?php 
@@ -17,12 +17,8 @@
     </div>
 
     <div class="page">
-      <?php if($current_subject) { ?> 
-       <h2>Manage Subject</h2> 
-        Menu Name: <?php echo htmlentities($current_subject["menu_name"]); ?>   <br/>
-        
-      <?php } elseif($current_page) { ?>
-
+      <?php if($current_page) { ?>
+  
         <h2>Manage Page</h2>
 
          <div class="view-content">

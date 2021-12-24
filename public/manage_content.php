@@ -5,7 +5,7 @@
 <?php $layout_context="public"?>
 <?php include('../includes/layouts/header.php');?>
 <?php find_selected_page(); ?>
-
+  
   <div class="main"> 
     <div class="navigation"> 
       <a href="admin.php">&laquo; Main Menu</a><br/>

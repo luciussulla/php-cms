@@ -82,8 +82,18 @@
     }
   }
 
-  function find_selected_page() {
-    global $current_page;
+  // this function will help me find the default subject's page
+  function find_default_page_for_subject($subject_id) {
+      $page_set = find_all_pages($subject_id); 
+      if($first_page = mysqli_fetch_assoc($page_set)) {
+        return $first_page; 
+      } else {
+        return null;
+      }
+  }
+
+  function find_selected_page($public=false) {
+    global $current_page; // this is an associative_array
     global $current_subject;
 
     if (isset($_GET["page"]) && isset($_GET["subject"])) { // this option is for the edit_page.php since it receives both subject and page ids
@@ -91,12 +101,16 @@
       $current_subject = find_subject_by_id($_GET["subject"]);
     } elseif (isset($_GET["subject"])) {
       $current_subject = find_subject_by_id($_GET["subject"]);
-      $current_page = null; 
+      if($public) {
+        $current_page = find_default_page_for_subject($current_subject["id"]); // This function helps find degault's subjects page so something is shown on picking subject in menu 
+      } else {
+        $current_page = null; 
+      }
     } elseif(isset($_GET["page"])) {
       $current_page = find_page_by_id($_GET["page"]); 
       $current_subject = null; 
     } else {
-      $current_subject = null; 
+      $current_subject = null;  
       $current_page = null;
     }
   }
